@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
 
+
 namespace Circles
 {
     public partial class Form1 : Form
@@ -26,14 +27,30 @@ namespace Circles
         private int sizeofround = 100;
         
 
-        private void drawButton_Click(object sender, EventArgs e)
+        private  void drawButton_Click(object sender, EventArgs e)
         {
+            Random random = new Random((int)DateTime.Now.Ticks);
+            int x, y;
             
+            for (int i = -20; i < 10; i++)
+            {
+                x = random.Next(-500, 500);
+                y = random.Next(-500, 500);
+                
+               
+                draw(x, y);
+                this.Text = x + " - " + y;
+            }
+
+        }
+
+        private void draw(int x, int y)
+        {
             for (int i = 0; i < sizeofround; i++)
             {
                 circle = new Circle(ClientSize.Width, ClientSize.Height, i);
-                circle.X = 50;
-                circle.Y = 50;
+                circle.X = x;
+                circle.Y = y;
 
                 circle.Draw(gr, color);
                 if (checkBox1.Checked)
@@ -41,7 +58,6 @@ namespace Circles
                     Thread.Sleep(10);
                 }
             }
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,6 +80,8 @@ namespace Circles
                 {
                     Thread.Sleep(10);
                 }
+                this.Text = circle.X + " - " + circle.Y;
+
             }
         }
 

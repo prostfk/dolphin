@@ -1,0 +1,12 @@
+C:\Users\prost\Desktop\projects\delphi\Circles\bin\Debug\Circles.exe.config
+C:\Users\prost\Desktop\projects\delphi\Circles\bin\Debug\Circles.exe
+C:\Users\prost\Desktop\projects\delphi\Circles\bin\Debug\Circles.pdb
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.csprojAssemblyReference.cache
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.Form1.resources
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.LoadForm.resources
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.Properties.Resources.resources
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.SizeForm.resources
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.csproj.GenerateResource.cache
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.csproj.CoreCompileInputs.cache
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.exe
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.pdb
