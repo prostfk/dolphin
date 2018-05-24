@@ -10,3 +10,4 @@ C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.csproj.Generate
 C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.csproj.CoreCompileInputs.cache
 C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.exe
 C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.pdb
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.HelpForm.resources

@@ -14,7 +14,6 @@ namespace Circles
         {
             LoadForm temp = new LoadForm();
             temp.ShowDialog();
-            //Thread.Sleep(3000);
             temp.Close();
             InitializeComponent();
             gr = CreateGraphics();
@@ -36,10 +35,7 @@ namespace Circles
             {
                 x = random.Next(-500, 500);
                 y = random.Next(-500, 500);
-                
-               
                 draw(x, y);
-                this.Text = x + " - " + y;
             }
 
         }
@@ -72,16 +68,11 @@ namespace Circles
                 circle = new Circle(ClientSize.Width, ClientSize.Height, i);
                 circle.X = e.X - 450;
                 circle.Y = e.Y - 250;
-                
-
-                circle.Draw(gr, color);
-                
+                circle.Draw(gr, color);         
                 if (checkBox1.Checked)
                 {
                     Thread.Sleep(10);
                 }
-                this.Text = circle.X + " - " + circle.Y;
-
             }
         }
 
@@ -113,20 +104,16 @@ namespace Circles
         private void сохранитьВФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
             openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Filter = "text files(*.txt;*.docx)|*.txt;*.docx";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
-
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                         FileUtil.PutInWordFile(openFileDialog1.FileName, new string[] { " cirlce x: " + circle.X, ", circle y: " + circle.Y, ", radius: " + sizeofround , ", " + color.ToString()});                        
-                    
                 }
                 catch (Exception ex)
                 {
@@ -138,14 +125,11 @@ namespace Circles
 
         private void сохранитьВExcelфайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
             openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Filter = "text files(*.xls;*.xlsx)|*.xlsx;*.xls";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
-
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -158,6 +142,12 @@ namespace Circles
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
             }
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HelpForm form = new HelpForm();
+            form.ShowDialog();
         }
     }
 }
