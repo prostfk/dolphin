@@ -103,45 +103,13 @@ namespace Circles
 
         private void сохранитьВФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "text files(*.txt;*.docx)|*.txt;*.docx";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                        FileUtil.PutInWordFile(openFileDialog1.FileName, new string[] { " cirlce x: " + circle.X, ", circle y: " + circle.Y, ", radius: " + sizeofround , ", " + color.ToString()});                        
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-                }
-            }
+            FileUtil.PutInWordFile(new string[] { " cirlce x: " + circle.X, ", circle y: " + circle.Y, ", radius: " + sizeofround, ", " + color.ToString() });
 
         }
 
         private void сохранитьВExcelфайлToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "text files(*.xls;*.xlsx)|*.xlsx;*.xls";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    FileUtil.PutInExcelFile(openFileDialog1.FileName, new string[] { " cirlce x: " + circle.X, ", circle y: " + circle.Y, ", radius: " + sizeofround, ", " + color.ToString() });
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-                }
-            }
+        { 
+            FileUtil.PutInExcelFile(new string[] { " cirlce x: " + circle.X, ", circle y: " + circle.Y, ", radius: " + sizeofround, ", " + color.ToString() });
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
