@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
@@ -17,27 +18,43 @@ namespace Circles
             temp.Close();
             InitializeComponent();
             gr = CreateGraphics();
+            //bitmap = new Bitmap(Width, Height);
+            //gr = Graphics.FromImage(bitmap);
             gr.Clear(Color.White);
         }
         private Circle circle;
         private Color backgroundColor = Color.White;
         private Color color = Color.Black;
         static Graphics gr;
+        private Bitmap bitmap;
         private int sizeofround = 100;
-        
+        private Thread thread;
 
         private  void drawButton_Click(object sender, EventArgs e)
         {
+            if (thread != null)
+            {
+                if (thread.IsAlive)
+                {
+                    thread.Abort();
+                    thread.Join();
+                }
+            }
+            thread = new Thread(drawAll);
+            thread.Start();
+        }
+
+        private void drawAll()
+        {
             Random random = new Random((int)DateTime.Now.Ticks);
             int x, y;
-            
+
             for (int i = -20; i < 10; i++)
             {
                 x = random.Next(-500, 500);
                 y = random.Next(-500, 500);
                 draw(x, y);
             }
-
         }
 
         private void draw(int x, int y)
@@ -58,7 +75,10 @@ namespace Circles
 
         private void button1_Click(object sender, EventArgs e)
         {
-            gr.Clear(backgroundColor);
+            lock (gr)
+            {
+                gr.Clear(backgroundColor);
+            }
         }
 
         private void drawOnClick(object sender, MouseEventArgs e)
@@ -116,6 +136,34 @@ namespace Circles
         {
             HelpForm form = new HelpForm();
             form.ShowDialog();
+        }
+
+        private void savePic()
+        {
+            
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.InitialDirectory = "c:\\";
+            dialog.Filter = "All filies (*.*)|*.*";
+            dialog.FilterIndex = 1;
+            dialog.AddExtension = true;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                bitmap = new Bitmap(Width, Height);
+
+                gr.DrawImage(bitmap, this.Width, this.Height);
+                bitmap.Save(dialog.FileName);
+            }
+        }
+
+        private void сохранитьКартинкуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            savePic();
+        }
+
+        private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("helper_Help.exe");
         }
     }
 }
