@@ -106,7 +106,8 @@ namespace Circles
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            circlesList = new List<Circle>();
+            fullCirclesList = new List<Circle>();
             lock (gr)
             {
                 gr.Clear(backgroundColor);
@@ -117,7 +118,7 @@ namespace Circles
         {
             circle = new Circle(ClientSize.Width, ClientSize.Height, fileCircle.Diameter);
             circle.CloneParams(fileCircle);
-            circle.Draw(gr, color);
+            circle.Draw(gr, fileCircle.PenColor);
         }
 
         private void drawOnClick(object sender, MouseEventArgs e)
@@ -258,10 +259,10 @@ namespace Circles
             dialog.AddExtension = true;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                fullCirclesList = new List<Circle>();
+                var templist = new List<Circle>();
                 var crls = circle.DeserializeObjects(dialog.FileName);
-                fullCirclesList.AddRange(crls);
-                foreach(var i in fullCirclesList)
+                templist.AddRange(crls);
+                foreach(var i in templist)
                 {
                     drawFromConfigFile(i);
 
