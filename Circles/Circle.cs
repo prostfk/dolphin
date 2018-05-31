@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Circles
 {
@@ -70,7 +72,30 @@ namespace Circles
             result = result * hashconst + windowWidth;
             return result;
         }
+        
+        //Сериализация массива объектов в файл
+        public void SerializeObjects(string path, Circle []circles)
+        {
+            BinaryFormatter serializer = new BinaryFormatter();
 
+            using (FileStream fs = new FileStream(path + ".ini", FileMode.OpenOrCreate))
+            {
+                serializer.Serialize(fs, circles);
+            }
+        }
+
+        //Десериализация из файла в массива в объект 
+        public Circle[] DeserializeObjects(string path)
+        {
+            BinaryFormatter serializer = new BinaryFormatter();
+
+            using (FileStream fs = File.OpenRead(path))
+            {
+                 return (Circle[])serializer.Deserialize(fs);
+            }
+        }
+
+        //Генерация строки для записи в excel 
         public string[] StringForExcel()
         {
             return ToString().Split(',');

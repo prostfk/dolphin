@@ -22,14 +22,16 @@ namespace Circles
             temp.Close();
             InitializeComponent();
             gr = CreateGraphics();
+            circle = new Circle(ClientSize.Width, ClientSize.Height);
             //bitmap = new Bitmap(Width, Height);
             //gr = Graphics.FromImage(bitmap);
             gr.Clear(Color.White);
             //backTread = new Thread(drawByDeafault);
             circlesList = new List<Circle>();
+            fullCirclesList = new List<Circle>();
             
         }
-        private List<Circle> circlesList;
+        private List<Circle> circlesList, fullCirclesList;
         private Circle circle;
         private Color backgroundColor = Color.White;
         private Color color = Color.Black;
@@ -79,7 +81,7 @@ namespace Circles
                 y = random.Next(-500, 500);
                 draw(x, y);
                 circlesList.Add(circle);
-
+                fullCirclesList.Add(circle);
             }
 
         }
@@ -93,6 +95,7 @@ namespace Circles
                 circle.X = x;
                 circle.Y = y;
                 circle.Draw(gr, color);
+                fullCirclesList.Add(circle);
                 if (checkBox1.Checked)
                 {
                     Thread.Sleep(10);
@@ -110,6 +113,11 @@ namespace Circles
             }
         }
 
+        private void drawFromConfigFile(Circle fileCircle)
+        {
+            circle.Draw(gr, color);
+        }
+
         private void drawOnClick(object sender, MouseEventArgs e)
         {
            
@@ -118,12 +126,15 @@ namespace Circles
                 circle = new Circle(ClientSize.Width, ClientSize.Height, i);
                 circle.X = e.X - 450;
                 circle.Y = e.Y - 250;
-                circle.Draw(gr, color);         
+                circle.Draw(gr, color);
+                fullCirclesList.Add(circle);
                 if (checkBox1.Checked)
                 {
                     Thread.Sleep(10);
                 }
             }
+
+            circlesList.Add(circle);
         }
 
         private void изменитьЦветФонаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -153,6 +164,11 @@ namespace Circles
 
         private void сохранитьВФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (circlesList.Count == 0)
+            {
+                MessageBox.Show("Ваш холст пустой. Нечего добавить в файл");
+                return;
+            }
             var str = new List<string>();
             foreach(var i in circlesList)
             {
@@ -164,6 +180,11 @@ namespace Circles
 
         private void сохранитьВExcelфайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (circlesList.Count == 0)
+            {
+                MessageBox.Show("Ваш холст пустой. Нечего добавить в файл");
+                return;
+            }
             var list = new List<string[]>();
             for(int i = 0; i < circlesList.Count; i++)
             {
@@ -226,8 +247,38 @@ namespace Circles
             catch (Exception) { }
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = "c:\\";
+            dialog.Filter = "All filies (*.*)|*.*";
+            dialog.FilterIndex = 1;
+            dialog.AddExtension = true;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fullCirclesList = new List<Circle>();
+                var crls = circle.DeserializeObjects(dialog.FileName);
+                fullCirclesList.AddRange(crls);
+                foreach(var i in fullCirclesList)
+                {
+                    drawFromConfigFile(i);
+                }
+                
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.InitialDirectory = "c:\\";
+            dialog.Filter = "All filies (*.*)|*.*";
+            dialog.FilterIndex = 1;
+            dialog.AddExtension = true;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                circle.SerializeObjects(dialog.FileName, fullCirclesList.ToArray());
+
+            }
             
 
         }

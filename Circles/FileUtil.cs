@@ -44,7 +44,6 @@ namespace Circles
                 for (int i = 0; i < temp.Length; i++)
                 {
                     ObjWorkSheet.Cells[listvar+1, i+2] = temp[i];
-                    
                 }
             }
 
