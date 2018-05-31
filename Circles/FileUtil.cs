@@ -26,21 +26,26 @@ namespace Circles
         }
 
 
-        public static void PutInExcelFile(string []data)
+        public static void PutInExcelFile(List<string[]>data)
         {
             excel(data);
         }
 
-        private static void excel(string[] data)
+        private static void excel(List<string[]> data)
         {
             Microsoft.Office.Interop.Excel.Application ObjExcel = new Microsoft.Office.Interop.Excel.Application();
             Microsoft.Office.Interop.Excel.Workbook ObjWorkBook;
             Microsoft.Office.Interop.Excel.Worksheet ObjWorkSheet;
             ObjWorkBook = ObjExcel.Workbooks.Add(System.Reflection.Missing.Value);
             ObjWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ObjWorkBook.Sheets[1];
-            for (int i = 0, j = 1; i < data.Length; i++, j += 2) 
+            for(int listvar = 0; listvar < data.Count; listvar++)
             {
-                ObjWorkSheet.Cells[1, j] = data[i]; 
+                string [] temp = data[listvar];
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    ObjWorkSheet.Cells[listvar+1, i+2] = temp[i];
+                    
+                }
             }
 
             ObjExcel.Visible = true;

@@ -26,10 +26,10 @@ namespace Circles
             //gr = Graphics.FromImage(bitmap);
             gr.Clear(Color.White);
             //backTread = new Thread(drawByDeafault);
-            circlesList = new ArrayList();
+            circlesList = new List<Circle>();
             
         }
-        private ArrayList circlesList;
+        private List<Circle> circlesList;
         private Circle circle;
         private Color backgroundColor = Color.White;
         private Color color = Color.Black;
@@ -163,8 +163,13 @@ namespace Circles
         }
 
         private void сохранитьВExcelфайлToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
-            FileUtil.PutInExcelFile(new string[] { " cirlce x: " + circle.X, ", circle y: " + circle.Y, ", radius: " + sizeofround, ", " + color.ToString() });
+        {
+            var list = new List<string[]>();
+            for(int i = 0; i < circlesList.Count; i++)
+            {
+                list.Add(circlesList[i].StringForExcel());
+            }
+            FileUtil.PutInExcelFile(list);
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)

@@ -71,7 +71,12 @@ namespace Circles
             return result;
         }
 
-        //строковое представление объекта 
+        public string[] StringForExcel()
+        {
+            return ToString().Split(',');
+        }
+
+        //строковое представление объекта(word)
         public override string ToString() => String.Format("X: {0}, Y: {1}, Диаметр: {2}, Время появления объекта: {3}", this.X, this.Y, this.diameter, DateTime.Now.ToString());
 
     }
