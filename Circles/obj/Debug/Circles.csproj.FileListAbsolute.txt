@@ -11,3 +11,8 @@ C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.csproj.CoreComp
 C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.exe
 C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.pdb
 C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.HelpForm.resources
+C:\Users\prost\Desktop\projects\delphi\Circles\bin\Debug\OpenGL.dll
+C:\Users\prost\Desktop\projects\delphi\Circles\bin\Debug\Tao.FreeGlut.dll
+C:\Users\prost\Desktop\projects\delphi\Circles\bin\Debug\OpenGL.dll.config
+C:\Users\prost\Desktop\projects\delphi\Circles\bin\Debug\Tao.FreeGlut.dll.config
+C:\Users\prost\Desktop\projects\delphi\Circles\obj\Debug\Circles.csproj.CopyComplete

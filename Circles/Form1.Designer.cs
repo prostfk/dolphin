@@ -35,6 +35,7 @@
             this.поменятьЦветToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьДиаметрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьЦветФонаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьКартинкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,13 +44,13 @@
             this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.сохранитьКартинкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // drawButton
             // 
-            this.drawButton.Location = new System.Drawing.Point(779, 57);
+            this.drawButton.Location = new System.Drawing.Point(817, 28);
             this.drawButton.Name = "drawButton";
             this.drawButton.Size = new System.Drawing.Size(98, 23);
             this.drawButton.TabIndex = 0;
@@ -59,7 +60,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(649, 57);
+            this.button1.Location = new System.Drawing.Point(736, 28);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -112,6 +113,13 @@
             this.изменитьЦветФонаToolStripMenuItem.Text = "Изменить цвет фона";
             this.изменитьЦветФонаToolStripMenuItem.Click += new System.EventHandler(this.изменитьЦветФонаToolStripMenuItem_Click);
             // 
+            // сохранитьКартинкуToolStripMenuItem
+            // 
+            this.сохранитьКартинкуToolStripMenuItem.Name = "сохранитьКартинкуToolStripMenuItem";
+            this.сохранитьКартинкуToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.сохранитьКартинкуToolStripMenuItem.Text = "Сохранить картинку";
+            this.сохранитьКартинкуToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКартинкуToolStripMenuItem_Click);
+            // 
             // wordToolStripMenuItem
             // 
             this.wordToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -154,7 +162,7 @@
             // помощьToolStripMenuItem
             // 
             this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.помощьToolStripMenuItem.Text = "Помощь";
             this.помощьToolStripMenuItem.Click += new System.EventHandler(this.помощьToolStripMenuItem_Click);
             // 
@@ -168,25 +176,29 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(779, 28);
+            this.checkBox1.Location = new System.Drawing.Point(562, 32);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(64, 17);
             this.checkBox1.TabIndex = 3;
             this.checkBox1.Text = "slow-mo";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // сохранитьКартинкуToolStripMenuItem
+            // button2
             // 
-            this.сохранитьКартинкуToolStripMenuItem.Name = "сохранитьКартинкуToolStripMenuItem";
-            this.сохранитьКартинкуToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.сохранитьКартинкуToolStripMenuItem.Text = "Сохранить картинку";
-            this.сохранитьКартинкуToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКартинкуToolStripMenuItem_Click);
+            this.button2.Location = new System.Drawing.Point(632, 28);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(98, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Анимация 1";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 486);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.drawButton);
@@ -196,6 +208,8 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Окружности";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.drawOnClick);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -222,6 +236,7 @@
         private System.Windows.Forms.ToolStripMenuItem помощьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьКартинкуToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
     }
 }
 

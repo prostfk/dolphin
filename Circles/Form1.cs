@@ -1,7 +1,11 @@
-﻿using System;
+﻿
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -21,14 +25,33 @@ namespace Circles
             //bitmap = new Bitmap(Width, Height);
             //gr = Graphics.FromImage(bitmap);
             gr.Clear(Color.White);
+            //backTread = new Thread(drawByDeafault);
+            circlesList = new ArrayList();
+            
         }
+        private ArrayList circlesList;
         private Circle circle;
         private Color backgroundColor = Color.White;
         private Color color = Color.Black;
         static Graphics gr;
         private Bitmap bitmap;
         private int sizeofround = 100;
-        private Thread thread;
+        private Thread thread, backTread;
+
+        private void drawByDeafault()
+        {
+            
+            while (true)
+            {
+                Random random = new Random((int)DateTime.Now.Ticks);
+
+                lock (backTread)
+                {
+                    draw(random.Next(-500, 500), random.Next(-500, 500));
+                    Thread.Sleep(1);
+                }
+            }
+        }
 
         private  void drawButton_Click(object sender, EventArgs e)
         {
@@ -38,6 +61,7 @@ namespace Circles
                 {
                     thread.Abort();
                     thread.Join();
+                    
                 }
             }
             thread = new Thread(drawAll);
@@ -54,27 +78,32 @@ namespace Circles
                 x = random.Next(-500, 500);
                 y = random.Next(-500, 500);
                 draw(x, y);
+                circlesList.Add(circle);
+
             }
+
         }
 
         private void draw(int x, int y)
         {
+            
             for (int i = 0; i < sizeofround; i++)
             {
                 circle = new Circle(ClientSize.Width, ClientSize.Height, i);
                 circle.X = x;
                 circle.Y = y;
-
                 circle.Draw(gr, color);
                 if (checkBox1.Checked)
                 {
                     Thread.Sleep(10);
                 }
             }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             lock (gr)
             {
                 gr.Clear(backgroundColor);
@@ -83,6 +112,7 @@ namespace Circles
 
         private void drawOnClick(object sender, MouseEventArgs e)
         {
+           
             for(int i = 0;i < sizeofround; i++)
             {
                 circle = new Circle(ClientSize.Width, ClientSize.Height, i);
@@ -123,7 +153,12 @@ namespace Circles
 
         private void сохранитьВФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileUtil.PutInWordFile(new string[] { " cirlce x: " + circle.X, ", circle y: " + circle.Y, ", radius: " + sizeofround, ", " + color.ToString() });
+            var str = new List<string>();
+            foreach(var i in circlesList)
+            {
+                str.Add(i.ToString());
+            }
+            FileUtil.PutInWordFile(str.ToArray());
 
         }
 
@@ -164,6 +199,32 @@ namespace Circles
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("helper_Help.exe");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //drawByDeafault();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                thread.Abort();
+                thread.Join();
+            }catch (Exception) { }
+            try
+            {
+                backTread.Abort();
+                backTread.Join();
+            }
+            catch (Exception) { }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+
         }
     }
 }
