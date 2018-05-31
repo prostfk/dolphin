@@ -115,6 +115,8 @@ namespace Circles
 
         private void drawFromConfigFile(Circle fileCircle)
         {
+            circle = new Circle(ClientSize.Width, ClientSize.Height, fileCircle.Diameter);
+            circle.CloneParams(fileCircle);
             circle.Draw(gr, color);
         }
 
@@ -262,6 +264,7 @@ namespace Circles
                 foreach(var i in fullCirclesList)
                 {
                     drawFromConfigFile(i);
+
                 }
                 
             }

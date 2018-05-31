@@ -27,6 +27,15 @@ namespace Circles
             this.diameter = diameter;
         }
 
+        public int Diameter
+        {
+            set
+            {
+                diameter = value;
+            }
+            get { return diameter; }
+        }
+
         //getter, setter для x
         public int X
         {
@@ -82,6 +91,12 @@ namespace Circles
             {
                 serializer.Serialize(fs, circles);
             }
+        }
+
+        public void CloneParams(Circle newCircle)
+        {
+            this.x = newCircle.X;
+            this.y = newCircle.Y;
         }
 
         //Десериализация из файла в массива в объект 
